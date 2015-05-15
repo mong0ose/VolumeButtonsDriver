@@ -1,18 +1,88 @@
 package citrusdev.com.volumebuttonsdriver;
 
+import static citrusdev.com.volumebuttonsdriver.Constant.ITEM;
+import static citrusdev.com.volumebuttonsdriver.Constant.DESCR;
+
+import android.content.Intent;
+import android.media.AudioManager;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MainActivity extends ActionBarActivity {
+    private ListView listViewMain;
+    private ArrayList<HashMap> list;
+    private SettingsContentObserver mSettingsContentObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        mSettingsContentObserver = new SettingsContentObserver(this,new Handler());
+        getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, mSettingsContentObserver );
+
+        listViewMain = (ListView) findViewById(R.id.listViewMain);
+
+        generateList();
+        final ListViewAdapter adapter = new ListViewAdapter(this, list);
+
+        listViewMain.setAdapter(adapter);
+        listViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch(position){
+                    case 0:
+
+
+                        System.out.println("Vol up");
+                        break;
+                    case 1:
+                        System.out.println("Vol down");
+                        break;
+                    case 2:
+                        System.out.println("Power sw");
+                        break;
+                    case 3:
+                        System.out.println("About");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getApplicationContext().getContentResolver().unregisterContentObserver(mSettingsContentObserver);
+    }
+
+    private void generateList(){
+        String[] arrayItems = getResources().getStringArray(R.array.listview_items);
+        String[] arrayDescr = getResources().getStringArray(R.array.listview_items_descr);
+        list = new ArrayList<>();
+        System.out.println("aaa");
+        for (int i = 0; i < arrayItems.length; i++){
+            HashMap tmp = new HashMap();
+            tmp.put(ITEM, arrayItems[i]);
+            tmp.put(DESCR, arrayDescr[i]);
+            list.add(tmp);
+        }
+    }
+
 
 
     @Override

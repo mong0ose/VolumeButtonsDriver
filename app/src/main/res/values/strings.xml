@@ -3,4 +3,18 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string-array name="listview_items">
+        <item>Volume Up</item>
+        <item>Volume Down</item>
+        <item>Power switch</item>
+        <item>About</item>
+    </string-array>
+    <string-array name="listview_items_descr">
+        <item>Set functions on volume up button.</item>
+        <item>Set functions on volume down button.</item>
+        <item>Set functions on power switcher.</item>
+        <item>Information about this program.</item>
+    </string-array>
+
+
 </resources>
