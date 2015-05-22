@@ -4,6 +4,7 @@ import static citrusdev.com.volumebuttonsdriver.Constant.ITEM;
 import static citrusdev.com.volumebuttonsdriver.Constant.DESCR;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
     private ListView listViewMain;
     private ArrayList<HashMap> list;
     private SettingsContentObserver mSettingsContentObserver;
+    private IncomingCallBroadcastReciever mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        mReceiver = new IncomingCallBroadcastReciever();
+        registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_MEDIA_BUTTON));
 
         mSettingsContentObserver = new SettingsContentObserver(this,new Handler());
         getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, mSettingsContentObserver );
@@ -44,8 +50,6 @@ public class MainActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch(position){
                     case 0:
-
-
                         System.out.println("Vol up");
                         break;
                     case 1:
@@ -57,6 +61,15 @@ public class MainActivity extends ActionBarActivity {
                     case 3:
                         System.out.println("About");
                         break;
+                    case 4:
+                        Toast.makeText(getApplicationContext(), "Start Google Maps View!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        break;
+                    case 5:
+                        Toast.makeText(getApplicationContext(), "Start Yandex Maps View!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), YandexMapsActivity.class));
+                        break;
+
                     default:
                         break;
                 }
@@ -67,6 +80,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(mReceiver);
         getApplicationContext().getContentResolver().unregisterContentObserver(mSettingsContentObserver);
     }
 

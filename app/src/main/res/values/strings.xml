@@ -8,13 +8,19 @@
         <item>Volume Down</item>
         <item>Power switch</item>
         <item>About</item>
+        <item>Google Maps</item>
+        <item>Yandex Maps</item>
     </string-array>
     <string-array name="listview_items_descr">
         <item>Set functions on volume up button.</item>
         <item>Set functions on volume down button.</item>
         <item>Set functions on power switcher.</item>
         <item>Information about this program.</item>
+        <item>Show maps using Google Maps API</item>
+        <item>Show maps using YandexMapKit</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_yandex_maps">YandexMapsActivity</string>
 
 
 </resources>
