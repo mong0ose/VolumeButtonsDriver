@@ -73,7 +73,7 @@ public class MapsActivity extends FragmentActivity {
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                mMap.addMarker(new MarkerOptions().position(latLng)).setTitle("New: " + counter + 1);
+                mMap.addMarker(new MarkerOptions().position(latLng)).setTitle("New: " + (counter += 1));
             }
         });
 

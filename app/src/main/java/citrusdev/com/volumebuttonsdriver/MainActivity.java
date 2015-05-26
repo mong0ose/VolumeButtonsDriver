@@ -67,7 +67,6 @@ public class MainActivity extends ActionBarActivity {
                         break;
                     case 5:
                         Toast.makeText(getApplicationContext(), "Start Yandex Maps View!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), YandexMapsActivity.class));
                         break;
 
                     default:
