@@ -43,14 +43,14 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".MapsActivity"
+        <activity android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
-        <activity
-            android:name=".YandexMapsActivity"
-            android:label="@string/title_activity_yandex_maps" >
+
+        <activity android:name=".TutorialActivity">
         </activity>
+
+
     </application>
 
 </manifest>

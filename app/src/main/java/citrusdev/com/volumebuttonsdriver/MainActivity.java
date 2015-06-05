@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +48,8 @@ public class MainActivity extends ActionBarActivity {
 
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
+//        RecyclerView
+
         mReceiver = new IncomingCallBroadcastReciever();
         registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_MEDIA_BUTTON));
 
@@ -65,6 +68,8 @@ public class MainActivity extends ActionBarActivity {
                 switch(position){
                     case 0:
                         System.out.println("Vol up");
+                        Intent intentTutorial = new Intent(getBaseContext(), TutorialActivity.class);
+                        startActivity(intentTutorial);
                         break;
                     case 1:
                         System.out.println("Vol down");
